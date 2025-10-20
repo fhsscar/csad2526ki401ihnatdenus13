@@ -1,4 +1,0 @@
-=== Copilot Prompts Log ===
-Лабораторна №1: Автоматизація проєкту "Hello World"
-
-Промпт для заповнення CMakeLists.txt: Generate a basic CMakeLists.txt for a C++ project with a main.cpp file that builds a "main" executable.
