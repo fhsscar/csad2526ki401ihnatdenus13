@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
+﻿#include <gtest/gtest.h>
 #include "../math_operations.cpp"
+#include <iostream>
 
 TEST(MathOperationsTest, AddTest) {
     EXPECT_EQ(add(2, 3), 5);
@@ -8,5 +9,8 @@ TEST(MathOperationsTest, AddTest) {
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    int result = RUN_ALL_TESTS();
+    std::cout << "Press Enter to exit..." << std::endl;
+    std::cin.get(); // Чекає натискання Enter
+    return result;
 }
