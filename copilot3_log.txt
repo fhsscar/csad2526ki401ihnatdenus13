@@ -1,0 +1,7 @@
+// Create a simple C++ header declaring a function int add(int a, int b);
+
+// Implement the add(int a, int b) function declared in math_operations.h
+
+// Create GoogleTest unit tests for the add(int a, int b) function
+
+# Generate a basic CMakeLists.txt for a C++ project with a main.cpp file that builds a "main" executable. | # Add math_operations module | # Add unit test
