@@ -1,0 +1,3 @@
+//Create a Windows batch script to build and test a C++ project using CMake. 
+
+// The script should create a build directory, configure, build, and run ctest.
