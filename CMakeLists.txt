@@ -11,6 +11,7 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
 
 # Основний виконуваний файл
 add_executable(main main.cpp)
+target_link_libraries(main PRIVATE math_operations)
 
 # Додаємо підтримку тестів
 include(CTest)
