@@ -21,7 +21,6 @@ enable_testing()
 if(NOT WIN32)
     find_package(Threads REQUIRED)
     target_link_libraries(main PRIVATE Threads::Threads)
-    target_link_libraries(unit_tests PRIVATE Threads::Threads)
 endif()
 
 # Автоматично завантажуємо і конфігуруємо Google Test
@@ -43,4 +42,7 @@ add_library(math_operations math_operations.cpp)
 # Створюємо виконуваний файл для тестів
 add_executable(unit_tests tests/unit_tests.cpp)
 target_link_libraries(unit_tests PRIVATE math_operations gtest gtest_main)
+if(NOT WIN32)
+    target_link_libraries(unit_tests PRIVATE Threads::Threads)
+endif()
 add_test(NAME unit_tests COMMAND unit_tests)
