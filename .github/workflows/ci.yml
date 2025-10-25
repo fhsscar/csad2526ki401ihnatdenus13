@@ -35,6 +35,7 @@ jobs:
         else
           cmake --build build
         fi
+      shell: bash
 
     - name: Run tests
       run: ctest --test-dir build --output-on-failure ${{ matrix.os == 'windows-latest' && '-C Debug' || '' }}

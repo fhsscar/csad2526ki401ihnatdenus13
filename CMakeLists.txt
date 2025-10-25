@@ -18,10 +18,11 @@ include(CTest)
 enable_testing()
 
 # Уникаємо pthread на Windows
-if (WIN32)
-    set(THREADS_PREFER_PTHREAD_FLAG OFF)
+if(NOT WIN32)
+    find_package(Threads REQUIRED)
+    target_link_libraries(main PRIVATE Threads::Threads)
+    target_link_libraries(unit_tests PRIVATE Threads::Threads)
 endif()
-find_package(Threads REQUIRED)
 
 # Автоматично завантажуємо і конфігуруємо Google Test
 include(FetchContent)
