@@ -29,7 +29,7 @@ jobs:
       run: cmake -S . -B build
 
     - name: Build
-     run: |
+     run: | # Помилка тут: зайвий пробіл перед run:
     if [ "${{ matrix.os }}" = "windows-latest" ]; then
       cmake --build build --config Debug
     else
@@ -40,7 +40,7 @@ jobs:
       run: ctest --test-dir build --output-on-failure ${{ matrix.os == 'windows-latest' && '-C Debug' || '' }}
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4  # Оновлено з v3 до v4
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
-        path: build/Debug/  # Адаптуй path, якщо потрібно для всіх ОС
+        path: build/Debug/
