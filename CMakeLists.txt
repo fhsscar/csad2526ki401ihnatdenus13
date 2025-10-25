@@ -17,12 +17,18 @@ target_link_libraries(main PRIVATE math_operations)
 include(CTest)
 enable_testing()
 
+# Уникаємо pthread на Windows
+if (WIN32)
+    set(THREADS_PREFER_PTHREAD_FLAG OFF)
+endif()
+find_package(Threads REQUIRED)
+
 # Автоматично завантажуємо і конфігуруємо Google Test
 include(FetchContent)
 FetchContent_Declare(
   googletest
   GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG v1.14.0  # Оновлено з release-1.14.0 на v1.14.0
+  GIT_TAG v1.14.0
 )
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE) # Використовуємо /MDd
 FetchContent_MakeAvailable(googletest)
