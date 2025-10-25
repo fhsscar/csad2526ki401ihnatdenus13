@@ -29,12 +29,12 @@ jobs:
       run: cmake -S . -B build
 
     - name: Build
-     run: | # Помилка тут: зайвий пробіл перед run:
-    if [ "${{ matrix.os }}" = "windows-latest" ]; then
-      cmake --build build --config Debug
-    else
-      cmake --build build
-    fi
+      run: |
+        if [ "${{ matrix.os }}" = "windows-latest" ]; then
+          cmake --build build --config Debug
+        else
+          cmake --build build
+        fi
 
     - name: Run tests
       run: ctest --test-dir build --output-on-failure ${{ matrix.os == 'windows-latest' && '-C Debug' || '' }}
