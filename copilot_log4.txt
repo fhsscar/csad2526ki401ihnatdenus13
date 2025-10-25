@@ -1,0 +1,38 @@
+Промпти:
+//Create a Windows batch script to build and test a C++ project using CMake. 
+
+// The script should create a build directory, configure, build, and run ctest.
+
+Відповідь Copilot
+The batch script to build and test the C++ project using CMake has been created in ci.bat. Let me know if you need further assistance!
+
+@echo off
+
+:: Create a build directory if it doesn't exist
+if not exist build mkdir build
+
+:: Navigate to the build directory
+cd build
+
+:: Configure the project with CMake
+cmake ..
+if errorlevel 1 goto :error
+
+:: Build the project
+cmake --build .
+if errorlevel 1 goto :error
+
+:: Run tests with CTest, specifying Debug configuration
+ctest -C Debug --output-on-failure
+if errorlevel 1 goto :error
+
+:: Exit successfully
+echo Build and tests completed successfully.
+goto :end
+
+:error
+echo An error occurred during the build or test process.
+exit /b 1
+
+:end
+exit /b 0
