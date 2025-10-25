@@ -1,4 +1,4 @@
-name: Build and Test C++ Project
+﻿name: Build and Test C++ Project
 
 on:
   push:
@@ -29,13 +29,18 @@ jobs:
       run: cmake -S . -B build
 
     - name: Build
-      run: cmake --build build --config ${{ matrix.os == 'windows-latest' && 'Debug' || '' }}
+     run: |
+    if [ "${{ matrix.os }}" = "windows-latest" ]; then
+      cmake --build build --config Debug
+    else
+      cmake --build build
+    fi
 
     - name: Run tests
       run: ctest --test-dir build --output-on-failure ${{ matrix.os == 'windows-latest' && '-C Debug' || '' }}
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4  # ???????? ? v3 ?? v4
+      uses: actions/upload-artifact@v4  # Оновлено з v3 до v4
       with:
         name: build-artifacts
-        path: build/Debug/  # ??????? path, ???? ???????? ??? ???? ??
+        path: build/Debug/  # Адаптуй path, якщо потрібно для всіх ОС
