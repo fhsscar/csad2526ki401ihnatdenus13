@@ -1,0 +1,35 @@
+Промпт
+Please find a solution for this failing job. Use the logs, job definition, and any referenced files where the failure occurred. Keep your response focused on the solution and include code suggestions when appropriate.
+
+This happens because your workflow is trying to upload an artifact with a name that already exists in the current run. GitHub Actions does not allow uploading multiple artifacts with the same name in a single workflow run.
+
+How to fix it:
+
+Change the artifact name to ensure uniqueness in each run or step.
+You can append a unique identifier such as the job name, run number, build timestamp, or even ${{ github.run_id }} to the artifact name.
+Example fix in .github/workflows/ci.yml
+Find your artifact upload step in .github/workflows/ci.yml. It likely looks like:
+
+YAML
+- name: Upload artifact
+  uses: actions/upload-artifact@v3
+  with:
+    name: build-artifact
+    path: <your_path>
+Update it to:
+
+YAML
+- name: Upload artifact
+  uses: actions/upload-artifact@v3
+  with:
+    name: build-artifact-${{ github.run_id }}
+    path: <your_path>
+Or, to distinguish by job:
+
+YAML
+    name: build-artifact-${{ github.job }}
+This will ensure each upload gets a unique name and avoids the Conflict error.
+
+Next steps
+Commit and push this change to your branch.
+Re-run the workflow; the artifact upload should succeed.
